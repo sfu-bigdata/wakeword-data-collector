@@ -26,8 +26,18 @@ source .venv/bin/activate
 pip3 install -e .
 ```
 
+## Docker
 
+With [Compose](https://docs.docker.com/compose), we can use a YAML file to configure the application. Then, with a single command, create and start all the services from the configuration.
+* Build the image from the dockerfile using [`docker compose`](https://docs.docker.com/compose)
+	* Get the dockerfile from this repo 
+  * build it, for example: `docker compose build`
 
+* Developers can run the container with the command `docker compose run secretsauce-data-collector -f production.yaml` which mounts the entire wakeword-data-collector folder and launches a terminal prompt
+  * Run the collector with `source .venv/bin/activate && wakeword_collect`
+* All other users can run the collector with `docker compose run secretsauce-data-collector -f production.yaml` which mounts the directory of `audio` recordings and automatically launches the `wakeword_collect`
+
+> Note: when using the docker configuration, you will need to once configure a dedicated network with `docker network create -d bridge secretsauce`
 
 ## Usage
 Simply run `wakeword_collect` in your console and follow the instructions.
