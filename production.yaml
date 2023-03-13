@@ -1,0 +1,17 @@
+version: "3.9"
+name: wakeword
+services:
+  secretsauce-data-collector:
+    build: 
+      dockerfile: Dockerfile
+      target: prod
+    volumes:
+      - "audio:/app/wakeword-data-collector" # for prod
+    devices:
+      - /dev/snd
+    networks:
+      - secretsauce
+networks:
+  secretsauce:
+    external: true
+    #Create a network with $ docker network create -d bridge secretsauce
