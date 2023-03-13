@@ -16,7 +16,7 @@ The Wakeword Data Collector records wave files with a sample rate of `16000` for
    * other longer recordings: recording the TV and a natural conversation `audio/not-wake-word/`
 
 ## Installation
-You may have to install the pyaudio dependancy, ie:
+You may have to install the pyaudio dependency, ie:
 `sudo apt-get install portaudio19-dev`.
 
 As usual once you have cloned the repo, it is recommended to create and activate python virtual environment to install the requirements.
@@ -43,7 +43,7 @@ For a first time user, it is highly recommended to do a full data collection of 
 * `6. Third set of 16 wakeword recordings`
 * `7. First random conversation recordings`
 * `8. Second random TV recording`
-* `9. Second rantom TV recording`
+* `9. Second random TV recording`
 * The background recordings taken throughout the sessions will be in `audio/not-wake-word/background/`
 
 If you are doing a data collection to add another user it is recommended to record:
