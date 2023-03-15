@@ -21,6 +21,7 @@ COPY . wakeword-data-collector/
 # Pip Install additional dependencies in venv
 # WORKDIR wakeword-data-collector
 RUN python3 -m venv .venv
+RUN /app/.venv/bin/python3 -m pip install --upgrade pip
 RUN .venv/bin/pip install -e wakeword-data-collector
 
 WORKDIR /app
