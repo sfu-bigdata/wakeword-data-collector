@@ -33,9 +33,9 @@ With [Compose](https://docs.docker.com/compose), we can use a YAML file to confi
 	* Get the dockerfile from this repo 
   * build it, for example: `docker compose build` or `docker build -t precise-wakeword-model-maker .`
 
-* Developers can run the container with the command `docker compose run secretsauce-data-collector -f production.yaml` which mounts the entire wakeword-data-collector folder and launches a terminal prompt
+* Developers can run the container with the command `docker compose run secretsauce-data-collector` which mounts the entire wakeword-data-collector folder and launches a terminal prompt
   * Run the collector with `source .venv/bin/activate && wakeword_collect`
-* All other users can run the collector with `docker compose run secretsauce-data-collector -f production.yaml` which mounts the directory of `audio` recordings and automatically launches the `wakeword_collect`
+* All other users can run the collector with `docker compose -f production.yaml run secretsauce-data-collector` which automatically launches the `wakeword_collect` and mounts the directory of `audio` recordings
 
 > Note: when using the docker configuration, you will need to once configure a dedicated network with `docker network create -d bridge secretsauce`
 
