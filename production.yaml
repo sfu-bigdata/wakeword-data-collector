@@ -6,7 +6,7 @@ services:
       dockerfile: Dockerfile
       target: prod
     volumes:
-      - "audio:/app/wakeword-data-collector" # for prod
+      - "./audio:/app/wakeword-data-collector" # for prod
     devices:
       - /dev/snd
     networks:

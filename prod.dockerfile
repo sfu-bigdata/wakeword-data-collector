@@ -27,6 +27,9 @@ RUN .venv/bin/pip install -e wakeword-data-collector
 # CMD "/app/.venv/bin/wakeword_collect"
 ENTRYPOINT "/app/.venv/bin/wakeword_collect"
 
+WORKDIR app
+RUN touch version.prod
+
 # So we start it with bash, a user types 'source .venv/bin/activate' and then runs the command "wakeword_collect"
 WORKDIR /app
 CMD bash

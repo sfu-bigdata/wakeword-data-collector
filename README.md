@@ -31,7 +31,7 @@ pip3 install -e .
 With [Compose](https://docs.docker.com/compose), we can use a YAML file to configure the application. Then, with a single command, create and start all the services from the configuration.
 * Build the image from the dockerfile using [`docker compose`](https://docs.docker.com/compose)
 	* Get the dockerfile from this repo 
-  * build it, for example: `docker compose build`
+  * build it, for example: `docker compose build` or `docker build -t precise-wakeword-model-maker .`
 
 * Developers can run the container with the command `docker compose run secretsauce-data-collector -f production.yaml` which mounts the entire wakeword-data-collector folder and launches a terminal prompt
   * Run the collector with `source .venv/bin/activate && wakeword_collect`
