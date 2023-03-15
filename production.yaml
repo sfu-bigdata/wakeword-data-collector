@@ -3,7 +3,7 @@ name: wakeword
 services:
   secretsauce-data-collector:
     build: 
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.prod
       target: prod
     volumes:
       - "./audio:/app/wakeword-data-collector" # for prod
