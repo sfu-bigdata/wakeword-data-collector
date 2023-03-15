@@ -39,10 +39,11 @@ COPY . wakeword-data-collector/
 # Pip Install additional dependencies in venv
 # WORKDIR wakeword-data-collector
 RUN python3 -m venv .venv
+RUN /app/.venv/bin/python3 -m pip install --upgrade pip
 RUN .venv/bin/pip install -e wakeword-data-collector
 
 WORKDIR /app
-RUN touch version.prod
+RUN touch version-`date +%Y-%m-%d:%H:%M.%p`.prod
 
 # I would love to start the container and it opens in the terminal in the venv with this script running, then a user can select which option they want, but it doesn't seem to work.
 # CMD "/app/.venv/bin/wakeword_collect"
