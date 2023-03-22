@@ -11,6 +11,7 @@ services:
       # - /mnt/wslg/:/mnt/wslg/ # only Windows
       # - ~/.config/pulse:/home/pulseaudio/.config/pulse # only MacOS
     # devices: # Ubuntu
+    #   - /dev/snd # Ubuntu
     env_file:
       - *.env # wsl.env | mac.env | ubuntu.env
     networks:
