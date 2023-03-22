@@ -34,7 +34,7 @@ Audio for containerized applications is managed by pulseaudio.
 
 #### Ubuntu
 
-ubuntu.env
+PulseAudio is part of Ubuntu and is likely pre-installed. Copy/paste the following commands into a shell terminal to creata a file `ubuntu.env` in the current directory.
 ```bash
 cat > ubuntu.env << EOF
 export PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native
@@ -43,11 +43,11 @@ EOF
 
 #### MacOS
 
-Install PulseAudio with Homebrew `brew install pulseaudio` and launch with `brew services start pulseaudio`. [Install PulseAudio on the Mac host](https://devops.datenkollektiv.de/running-a-docker-soundbox-on-mac.html)
+Install PulseAudio with Homebrew `brew install pulseaudio` and launch with `brew services start pulseaudio`. Further details and examples can be found [here](https://devops.datenkollektiv.de/running-a-docker-soundbox-on-mac.html "Install PulseAudio on the Mac host").
 
 To play sounds from the docker container, create an environemnt file `mac.env` with the following variables.
 
-mac.env
+Copy/paste the following commands into a shell terminal to creata a file `mac.env` in the current directory.
 ```bash
 cat > mac.env << EOF
 export PULSE_SERVER=docker.for.mac.localhost
@@ -60,7 +60,7 @@ On Windows, PulseAusio support is provided by the [WSL2 and WSLg backends](https
 - Ensure latest version of WSL is installed `wsl --update`.
 - Create an environemnt file `wsl.env`
 
-wsl.env
+Copy/paste the following commands into a shell terminal to creata a file `wsl.env` in the current directory.
 ```bash
 cat > wsl.env << EOF
 export PULSE_SERVER=unix:/mnt/wslg/PulseServer
