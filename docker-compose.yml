@@ -8,8 +8,11 @@ services:
     volumes:
       # - "./audio:/app/wakeword-data-collector" # for prod
       - ".:/app/wakeword-data-collector" # for dev
-    devices:
-      - /dev/snd
+      # - /mnt/wslg/:/mnt/wslg/ # only Windows
+      # - ~/.config/pulse:/home/pulseaudio/.config/pulse # only MacOS
+    # devices: # Ubuntu
+    env_file:
+      - *.env # wsl.env | mac.env | ubuntu.env
     networks:
       - secretsauce
 networks:

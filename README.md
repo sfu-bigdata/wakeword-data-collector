@@ -28,6 +28,58 @@ pip3 install -e .
 
 ## Docker
 
+### Audio prerequisites
+
+Audio for containerized applications is managed by pulseaudio. 
+
+#### Ubuntu
+
+ubuntu.env
+```bash
+cat > ubuntu.env << EOF
+export PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native
+EOF
+```
+
+#### MacOS
+
+Install PulseAudio with Homebrew `brew install pulseaudio` and launch with `brew services start pulseaudio`. [Install PulseAudio on the Mac host](https://devops.datenkollektiv.de/running-a-docker-soundbox-on-mac.html)
+
+To play sounds from the docker container, create an environemnt file `mac.env` with the following variables.
+
+mac.env
+```bash
+cat > mac.env << EOF
+export PULSE_SERVER=docker.for.mac.localhost
+EOF
+```
+#### Windows Docker with WSL2 backend
+
+On Windows, PulseAusio support is provided by the [WSL2 and WSLg backends](https://github.com/microsoft/wslg). With WSL support, the audio configuration is similar to [ubuntu](#ubuntu).
+
+- Ensure latest version of WSL is installed `wsl --update`.
+- Create an environemnt file `wsl.env`
+
+wsl.env
+```bash
+cat > wsl.env << EOF
+export PULSE_SERVER=unix:/mnt/wslg/PulseServer
+export XDG_RUNTIME_DIR=/mnt/wslg/runtime-dir
+EOF
+```
+
+#### Test the audio
+
+1. Play a known sound with `aplay /usr/share/sounds/alsa/Front_Center.wav`.
+
+2. Record a sound with `arecord -d 5 -f U8 sample.mp3` and playback with `aplay` command.
+
+If the above tests are able to playback and record, then docker is able to use the speaker and microphone from the container app. Otherwise, further troubleshooting may be needed [^1].
+
+[^1]: https://askubuntu.com/questions/57810/how-to-fix-no-soundcards-found/815516#815516
+
+### Build & Run
+
 With [Compose](https://docs.docker.com/compose), we can use a YAML file to configure the application. Then, with a single command, create and start all the services from the configuration.
 * Build the image from the dockerfile using [`docker compose`](https://docs.docker.com/compose)
 	* Get the dockerfile from this repo 
@@ -37,7 +89,7 @@ With [Compose](https://docs.docker.com/compose), we can use a YAML file to confi
   * Run the collector with `source .venv/bin/activate && wakeword_collect`
 * All other users can run the collector with `docker compose -f production.yaml run secretsauce-data-collector` which automatically launches the `wakeword_collect` and mounts the directory of `audio` recordings
 
-> Note: when using the docker configuration, you will need to once configure a dedicated network with `docker network create -d bridge secretsauce`
+> Note: when using the docker configuration, you will need to one-time configure a dedicated network using the commnad `docker network create -d bridge secretsauce`
 
 ## Usage
 Simply run `wakeword_collect` in your console and follow the instructions.
