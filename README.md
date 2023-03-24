@@ -87,6 +87,7 @@ With [Compose](https://docs.docker.com/compose), we can use a YAML file to confi
 
 * Developers can run the container with the command `docker compose run secretsauce-data-collector` which mounts the entire wakeword-data-collector folder and launches a terminal prompt
   * Run the collector with `source .venv/bin/activate && wakeword_collect`
+  * In case of 'PackageNotFoundError: No package metadata was found for wakeword-collector' run command `pip install -e wakeword-data-collector` before running wakeword_collect
 * All other users can run the collector with `docker compose -f production.yaml run secretsauce-data-collector` which automatically launches the `wakeword_collect` and mounts the directory of `audio` recordings
 
 > Note: when using the docker configuration, you will need to one-time configure a dedicated network using the commnad `docker network create -d bridge secretsauce`
