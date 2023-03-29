@@ -45,12 +45,14 @@ EOF
 
 Install PulseAudio with Homebrew `brew install pulseaudio` and launch with `brew services start pulseaudio`. Further details and examples can be found [here](https://devops.datenkollektiv.de/running-a-docker-soundbox-on-mac.html "Install PulseAudio on the Mac host").
 
+Alternatively, use `sudo pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon --system -v` to start pulseaudio instead of `brew services start pulseaudio`
+
 To play sounds from the docker container, create an environemnt file `mac.env` with the following variables.
 
 Copy/paste the following commands into a shell terminal to creata a file `mac.env` in the current directory.
 ```bash
 cat > mac.env << EOF
-export PULSE_SERVER=docker.for.mac.localhost
+export PULSE_SERVER=host.docker.internal
 EOF
 ```
 #### Windows Docker with WSL2 backend
@@ -78,6 +80,10 @@ If the above tests are able to playback and record, then docker is able to use t
 
 [^1]: https://askubuntu.com/questions/57810/how-to-fix-no-soundcards-found/815516#815516
 
+3. To test speaker to check if the audio can be played from inside container try running `docker run -it -e PULSE_SERVER=host.docker.internal -v ~/.config/pulse:/home/pulseaudio/.config/pulse --entrypoint speaker-test --rm jess/pulseaudio -c 2 -l 1 -t wav`
+
+4. In case of a situation where you would want to kill pulseaudio and start again you can do so by using commands like `pulseaudio --kill` or `brew services stop pulseaudio`
+
 ### Build & Run
 
 With [Compose](https://docs.docker.com/compose), we can use a YAML file to configure the application. Then, with a single command, create and start all the services from the configuration.
@@ -86,7 +92,7 @@ With [Compose](https://docs.docker.com/compose), we can use a YAML file to confi
   * build it, for example: `docker compose build` or `docker build -t precise-wakeword-model-maker .`
 
 * Developers can run the container with the command `docker compose run secretsauce-data-collector` which mounts the entire wakeword-data-collector folder and launches a terminal prompt
-  * Run the collector with `source .venv/bin/activate && wakeword_collect`
+  * Run the collector with `source .venv/bin/activate` , then `cd wakeword-data-collector/` and finally `wakeword_collect`
   * In case of 'PackageNotFoundError: No package metadata was found for wakeword-collector' run command `pip install -e wakeword-data-collector` before running wakeword_collect
 * All other users can run the collector with `docker compose -f production.yaml run secretsauce-data-collector` which automatically launches the `wakeword_collect` and mounts the directory of `audio` recordings
 
