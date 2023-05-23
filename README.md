@@ -34,7 +34,7 @@ Audio for containerized applications is managed by pulseaudio.
 
 #### Ubuntu
 
-PulseAudio is part of Ubuntu and is likely pre-installed. Copy/paste the following commands into a shell terminal to creata a file `ubuntu.env` in the current directory.
+PulseAudio is part of Ubuntu and is likely pre-installed. Copy/paste the following commands into a shell terminal to creata an environment file `ubuntu.env` in the current directory.
 ```bash
 cat > ubuntu.env << EOF
 export PULSE_SERVER=unix:${XDG_RUNTIME_DIR}/pulse/native
@@ -47,9 +47,9 @@ Install PulseAudio with Homebrew `brew install pulseaudio` and launch with `brew
 
 Alternatively, use `sudo pulseaudio --load=module-native-protocol-tcp --exit-idle-time=-1 --daemon --system -v` to start pulseaudio instead of `brew services start pulseaudio`
 
-To play sounds from the docker container, create an environemnt file `mac.env` with the following variables.
+To play sounds from the docker container, create an environment file `mac.env` with the following variables.
 
-Copy/paste the following commands into a shell terminal to creata a file `mac.env` in the current directory.
+Copy/paste the following commands into a shell terminal to create a file `mac.env` in the current directory.
 ```bash
 cat > mac.env << EOF
 export PULSE_SERVER=host.docker.internal
@@ -59,8 +59,8 @@ EOF
 
 On Windows, PulseAusio support is provided by the [WSL2 and WSLg backends](https://github.com/microsoft/wslg). With WSL support, the audio configuration is similar to [ubuntu](#ubuntu).
 
-- Ensure latest version of WSL is installed `wsl --update`
-- Set deafault version as WSL2 `wsl --set-default-version 2`
+- Ensure latest version of WSL is installed `wsl --update` _[requires admin privileges]_
+- Set default version as WSL2 `wsl --set-default-version 2` _[requires admin privileges]_
 - Create an environemnt file `wsl.env`
 
 Copy/paste the following commands into a shell terminal to create a file `wsl.env` in the current directory. 
