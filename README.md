@@ -59,10 +59,12 @@ EOF
 
 On Windows, PulseAusio support is provided by the [WSL2 and WSLg backends](https://github.com/microsoft/wslg). With WSL support, the audio configuration is similar to [ubuntu](#ubuntu).
 
-- Ensure latest version of WSL is installed `wsl --update`.
+- Ensure latest version of WSL is installed `wsl --update`
+- Set deafault version as WSL2 `wsl --set-default-version 2`
 - Create an environemnt file `wsl.env`
 
-Copy/paste the following commands into a shell terminal to creata a file `wsl.env` in the current directory.
+Copy/paste the following commands into a shell terminal to create a file `wsl.env` in the current directory. 
+> The file encoding must be readbale/supported by the underlying *nix shell. The PowerShell `Write-Output` command may produce a file with unexpected encodings/line terminations. The safest method is to create this file via text editor (e.g. notepad) and paste the two lines with `export`.
 ```bash
 cat > wsl.env << EOF
 export PULSE_SERVER=unix:/mnt/wslg/PulseServer
